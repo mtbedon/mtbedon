@@ -14,7 +14,6 @@ int main() {
     int stock = 0;
     float precio = 0.0;
     float ganancias = 0.0;
-
     int opcion;
     int registrado = 0;
 
@@ -32,35 +31,35 @@ int main() {
         switch (opcion) {
             case 1:{
                 int val=0;
-                do
-                {
-                    printf("Ingrese el ID del producto: (Formato: 123ABC)");
-                    scanf("%6s", &id);
-                    val=validarID(id);
-                    if (val!=1){
-                        printf("Ingrese el ID correctamente:\n ");
+                do {
+                    printf("Ingrese el ID del producto (Formato: 123ABC): ");
+                    scanf("%6s", id);
+                    val = validarID(id);
+                    if (val != 1) {
+                        printf("ID inválido. Intente nuevamente.\n");
                     }
                 } while (!val);
+
                 printf("Ingrese el nombre del producto (una sola palabra): ");
-                scanf(" %s", &nombre);
-                printf("Ingrese la cantidad en stock: ");
-                scanf("%d", &stock);
-                do{
+                scanf("%s", nombre);
+                do {
                     printf("Ingrese la cantidad en stock: ");
                     scanf("%d", &stock);
-                    printf("El stock debe superar 0\n");
-                }while(stock<=0);
-                printf("Ingrese el precio unitario: ");
-                scanf("%f", &precio);
-                do{
+                    if (stock <= 0) {
+                        printf("El stock debe ser mayor que 0.\n");
+                    }
+                    } while (stock <= 0);
+                do {
                     printf("Ingrese el precio unitario: ");
                     scanf("%f", &precio);
-                    printf("El precio debe ser positivo\n");
-                }while (precio<=0.0);
+                    if (precio <= 0.0) {
+                        printf("El precio debe ser positivo.\n");
+                    }
+                } while (precio <= 0.0);
                 ganancias = 0.0;
                 registrado = 1;
-                break;
-            }
+                printf("Producto registrado exitosamente.\n");
+                }
             case 2:{
                 if (registrado) {
                     int cantidad;
@@ -111,18 +110,18 @@ int main() {
                 }
                 break;
             }
-            case 5:
+            case 5:{
                 if (registrado) {
                     printf("Ganancias acumuladas: %.2f\n", ganancias);
                 } else {
                     printf("Primero debe registrar un producto.\n");
                 }
                 break;
-
-            case 6:
+            }
+            case 6:{
                 printf("Saliendo del programa...\n");
                 break;
-
+            }
             default:
                 printf("Opcion invalida.\n");
         }
